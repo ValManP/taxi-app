@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path="/user")
 public class UserController {
     @Autowired
-    protected UserRepository userRepository;
+    private UserRepository userRepository;
 
     @GetMapping(path="/authenticate")
     public @ResponseBody User authenticate(@RequestParam String name, @RequestParam String password) {
@@ -19,5 +19,6 @@ public class UserController {
 
     @PostMapping(path="/delete")
     public void deleteUser(@RequestParam int userId) {
+        userRepository.deleteById(userId);
     }
 }

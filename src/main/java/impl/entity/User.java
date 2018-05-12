@@ -1,15 +1,23 @@
 package impl.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-public class User {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
     private int ID;
+
+    @Column
     private String name;
+
+    @Column
     private String password;
+
+    @Column
+    private String description;
 
     public int getID() {
         return ID;
@@ -33,5 +41,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

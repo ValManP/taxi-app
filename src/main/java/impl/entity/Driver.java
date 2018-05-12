@@ -1,8 +1,16 @@
 package impl.entity;
 
+import javax.persistence.*;
+
+@Entity(name = "drivers")
 public class Driver extends User {
+    @OneToOne
     private Car car;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
+
+    @ManyToOne
     private Location location;
 
     public Car getCar() {

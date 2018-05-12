@@ -1,22 +1,40 @@
 package impl.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Order {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
     private int ID;
+
+    @Column
+    @ManyToOne
     private Driver driver;
+
+    @Column
+    @ManyToOne
     private Client client;
+
+    @Column
+    @ManyToOne
     private Location start;
+
+    @Column
+    @ManyToOne
     private Location finish;
+
+    @Column
+    @Temporal(TemporalType.TIME)
     private Date timestamp;
+
+    @Column
     private double price;
+
+    @Column
+    @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 
     public int getID() {

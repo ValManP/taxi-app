@@ -1,6 +1,11 @@
 package impl.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Location {
+    @Id
     private String name;
     private double latitude;
     private double longitude;

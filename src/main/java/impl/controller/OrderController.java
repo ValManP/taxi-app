@@ -1,9 +1,7 @@
 package impl.controller;
 
 import impl.db.OrderRepository;
-import impl.entity.Location;
-import impl.entity.Order;
-import impl.entity.PaymentType;
+import impl.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +29,12 @@ public class OrderController {
         order.setPrice(price);
         order.setPaymentType(paymentType);
 
-        orderRepository.save(order);
-        return order;
+        return orderRepository.save(order);
     }
 
     @GetMapping(path="/get")
     public @ResponseBody Order getOrder(@RequestParam int orderId) {
-        return orderRepository.findById(orderId).get();
+        return orderRepository.findById(orderId).orElse(null);
     }
 
     @GetMapping(path="/getByClient")
@@ -52,6 +49,26 @@ public class OrderController {
 
     @GetMapping(path="/getFree")
     public @ResponseBody List<Order> getFreeOrders() {
-        return null;
+        return orderRepository.findWithEmptyDriver();
+    }
+
+    @PostMapping(path = "/start")
+    public void startOrder(@RequestParam int driverId, @RequestParam int orderId) {
+        Order order = orderRepository.findById(orderId).orElse(null);
+        Driver driver = driverController.getDriver(driverId);
+
+        if (order == null || driver == null) {
+            return;
+        }
+
+        order.setDriver(driver);
+        driver.setStatus(Status.BUSY);
+
+        orderRepository.save(order);
+}
+
+    @PostMapping(path = "/complete")
+    public void completeOrder(@RequestParam int orderId) {
+
     }
 }

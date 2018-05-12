@@ -1,8 +1,14 @@
 package impl.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Car {
     private String model;
     private String color;
+
+    @Id
     private String number;
 
     public Car(String model, String color, String number) {
