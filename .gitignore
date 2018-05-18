@@ -1,4 +1,4 @@
 /.idea
-/target/classes/impl/controller/*.class
+/target/classes/edu.unn.taxi.impl/controller/*.class
 *.class
 *.iml

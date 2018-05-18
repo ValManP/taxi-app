@@ -4,8 +4,8 @@
        xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="orderController" class="impl.controller.OrderController"/>
-    <bean id="userController" class="impl.controller.UserController"/>
+    <bean id="orderController" class="edu.unn.taxi.impl.controller.OrderController"/>
+    <bean id="userController" class="edu.unn.taxi.impl.controller.UserController"/>
 
 
 </beans>
