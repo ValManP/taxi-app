@@ -16,11 +16,11 @@ public class Order {
     @ManyToOne
     private Client client;
 
-    @ManyToOne
-    private Location start;
+    @Column
+    private String start;
 
-    @ManyToOne
-    private Location finish;
+    @Column
+    private String finish;
 
     @Column
     @Temporal(TemporalType.TIME)
@@ -57,19 +57,19 @@ public class Order {
         this.client = client;
     }
 
-    public Location getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Location start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public Location getFinish() {
+    public String getFinish() {
         return finish;
     }
 
-    public void setFinish(Location finish) {
+    public void setFinish(String finish) {
         this.finish = finish;
     }
 

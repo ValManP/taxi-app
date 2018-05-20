@@ -1,10 +1,6 @@
 package edu.unn.taxi.impl.controller;
 
-import edu.unn.taxi.impl.entity.Location;
-import edu.unn.taxi.impl.entity.Order;
-import edu.unn.taxi.impl.entity.PaymentType;
 import edu.unn.taxi.impl.utils.spring.SpringTestConfiguration;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,17 +44,8 @@ public class OrderControllerTest {
     public void testCreateOrder() {
         // Arrange
 
-        int driverId = 1;
-        int clientId = 2;
-        Location start = new Location("s", 0, 0);
-        Location finish = new Location("f", 1, 1);
-        int price = 10;
-        PaymentType paymentType = PaymentType.CASH;
-
         // Act
-        Order order = orderController.createOrder(driverId, clientId, start, finish, price, paymentType);
 
         // Assert
-        Assert.assertNotNull(order);
     }
 }

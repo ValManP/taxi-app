@@ -21,6 +21,7 @@ public class OperatorController extends UserController {
         Operator operator = new Operator();
         operator.setName(name);
         operator.setPassword(password);
+        operator.setDescription(description);
 
         return operatorRepository.save(operator);
     }

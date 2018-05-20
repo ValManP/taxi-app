@@ -24,6 +24,7 @@ public class ClientController extends UserController {
         Client client = new Client();
         client.setName(name);
         client.setPassword(password);
+        client.setDescription(description);
 
         return clientRepository.save(client);
     }

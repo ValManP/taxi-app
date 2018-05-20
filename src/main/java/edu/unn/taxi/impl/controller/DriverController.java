@@ -2,12 +2,14 @@ package edu.unn.taxi.impl.controller;
 
 import com.google.common.collect.Lists;
 import edu.unn.taxi.impl.db.DriverRepository;
-import edu.unn.taxi.impl.entity.Car;
 import edu.unn.taxi.impl.entity.Driver;
 import edu.unn.taxi.impl.entity.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -19,12 +21,13 @@ public class DriverController extends UserController {
 
     @GetMapping(path = "/create")
     public @ResponseBody
-    Driver createDriver(@RequestParam String name, @RequestParam String password, @RequestParam String description, @RequestBody Car car) {
+    Driver createDriver(@RequestParam String name, @RequestParam String password, @RequestParam String description,
+                        @RequestParam String carNumber) {
         Driver driver = new Driver();
         driver.setName(name);
         driver.setPassword(password);
         driver.setDescription(description);
-        driver.setCar(car);
+        driver.setCar(carNumber);
         driver.setStatus(Status.FREE);
 
         return driverRepository.save(driver);
@@ -32,7 +35,8 @@ public class DriverController extends UserController {
 
     @GetMapping(path = "/update")
     public @ResponseBody
-    Driver updateDriver(@RequestParam int driverId, @RequestParam String description, @RequestBody Car car) {
+    Driver updateDriver(@RequestParam int driverId, @RequestParam String description,
+                        @RequestParam String carNumber, @RequestParam String status) {
         Driver driver = driverRepository.findById(driverId).orElse(null);
 
         if (driver == null) {
@@ -40,7 +44,8 @@ public class DriverController extends UserController {
         }
 
         driver.setDescription(description);
-        driver.setCar(car);
+        driver.setCar(carNumber);
+        driver.setStatus(Status.valueOf(status));
 
         return driverRepository.save(driver);
     }
@@ -57,7 +62,7 @@ public class DriverController extends UserController {
         return Lists.newArrayList(driverRepository.findAll());
     }
 
-    @PostMapping(path = "/sync")
+    @GetMapping(path = "/sync")
     public void syncLocations() {
 
     }
