@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import edu.unn.taxi.impl.db.ClientRepository;
 import edu.unn.taxi.impl.entity.Client;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class ClientController extends UserController {
     @Autowired
     private ClientRepository clientRepository;
 
-    @GetMapping(path = "/create")
+    @GetMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Client createClient(@RequestParam String name, @RequestParam String password, @RequestParam String description) {
         Client client = new Client();
@@ -29,7 +30,7 @@ public class ClientController extends UserController {
         return clientRepository.save(client);
     }
 
-    @GetMapping(path = "/update")
+    @GetMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Client updateClient(@RequestParam int clientId, @RequestParam String description) {
         Client client = clientRepository.findById(clientId).orElse(null);
@@ -43,13 +44,13 @@ public class ClientController extends UserController {
         return clientRepository.save(client);
     }
 
-    @GetMapping(path = "/get")
+    @GetMapping(path = "/get", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Client getClient(@RequestParam int clientId) {
         return clientRepository.findById(clientId).orElse(null);
     }
 
-    @GetMapping(path = "/getAll")
+    @GetMapping(path = "/getAll", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     List<Client> getAllClients() {
         return Lists.newArrayList(clientRepository.findAll());
